@@ -49,13 +49,14 @@ Running this code displays two figures.
 The first one plots the input time series and signals which elements were
 matched with a green line.
 
-![Discrete LCSS Series Plot](docs/_static/discrete_lcss_series_plot.png)
+![Discrete LCSS Series Plot](https://francescolafratta.github.io/lcsspy/_images/discrete_lcss_series_plot.png)
+
 The second figure plots only the elements from the input series that are part
 of the common subsequence.
 In this case, the common subsequence has length 6 since it contains six pairs
 of elements that were matched.
 
-![Discrete LCSS Sequence Plot](docs/_static/discrete_lcss_sequence_plot.png)
+![Discrete LCSS Sequence Plot](https://francescolafratta.github.io/lcsspy/_images/discrete_lcss_sequence_plot.png)
 
 This value is divided by the length of
 the shortest series to obtain the LCSS
@@ -112,8 +113,11 @@ plt.show()
 ```
 The LCSS measure equals $3/4$ and similar plots to those concerning the
 discrete LCSS example are displayed.
-![Continuous LCSS Series Plot](docs/_static/continuous_lcss_series_plot.png)
-![Continuous LCSS Sequence Plot](docs/_static/continuous_lcss_sequence_plot.png)
+
+![Continuous LCSS Series Plot](https://francescolafratta.github.io/lcsspy/_images/continuous_lcss_series_plot.png)
+
+![Continuous LCSS Sequence Plot](https://francescolafratta.github.io/lcsspy/_images/continuous_lcss_sequence_plot.png)
+
 Refer to the [documentation](https://francescolafratta.github.io/lcsspy/) for more details.
 
 # Testing
