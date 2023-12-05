@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Getting Started &#8212; lcsspy 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script src="_static/documentation_options.js?v=8d563738"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API Reference" href="api.html" />
+    <link rel="prev" title="Welcome to lcsspy’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">¶</a></h1>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
+<p>lcsspy supports any Python version starting from 3.9, and is OS independent.</p>
+<p>Regular installation can be performed by running the following command.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>lcsspy
+</pre></div>
+</div>
+<p>This will install lcsspy and its required dependencies.</p>
+<p>If you want, you can install pytest as an optional dependency by running
+a slightly different command.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>lcsspy<span class="o">[</span>tests<span class="o">]</span>
+</pre></div>
+</div>
+<p>This allows you to run existing tests, or write your own.
+Refer to the <a class="reference external" href="https://pytest.org">pytest documentation</a>
+to learn more about running tests.</p>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
+<section id="discrete-lcss">
+<h3>Discrete LCSS<a class="headerlink" href="#discrete-lcss" title="Link to this heading">¶</a></h3>
+<p>Discrete LCSS measures similarity between time series with discrete
+time indexes. It’s the formulation introduced by
+<a class="reference external" href="https://ieeexplore.ieee.org/document/994784">Vlachos</a>.</p>
+<p>The following script matches elements that have a value difference
+smaller than 1.1, and that are at most 1 index position apart.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">lcsspy.lcss</span> <span class="kn">import</span> <span class="n">discrete_lcss</span>
+
+<span class="n">ts1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">18</span><span class="p">])</span>
+<span class="n">ts2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">17</span><span class="p">])</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">discrete_lcss</span><span class="p">(</span><span class="n">ts1</span><span class="o">=</span><span class="n">ts1</span><span class="p">,</span> <span class="n">ts2</span><span class="o">=</span><span class="n">ts2</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">lcss_measure</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Running this code displays two figures.
+The first one plots the input time series and signals which elements were
+matched with a green line.</p>
+<a class="reference internal image-reference" href="_images/discrete_lcss_series_plot.png"><img alt="_images/discrete_lcss_series_plot.png" src="_images/discrete_lcss_series_plot.png" style="width: 800px;" /></a>
+<p>The second figure plots only the elements from the input series that are part
+of the common subsequence.
+In this case, the common subsequence has length 6 since it contains six pairs
+of elements that were matched.</p>
+<a class="reference internal image-reference" href="_images/discrete_lcss_sequence_plot.png"><img alt="_images/discrete_lcss_sequence_plot.png" src="_images/discrete_lcss_sequence_plot.png" style="width: 800px;" /></a>
+<p>This value is divided by the length of
+the shortest series to obtain the LCSS
+measure which belongs to the range <span class="math notranslate nohighlight">\([0, 1]\)</span>.</p>
+<p>The measure equals <span class="math notranslate nohighlight">\(6/8\)</span>, which is printed to the console.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="go">0.75</span>
+</pre></div>
+</div>
+</section>
+<section id="continuous-lcss">
+<h3>Continuous LCSS<a class="headerlink" href="#continuous-lcss" title="Link to this heading">¶</a></h3>
+<p>Continuous LCSS deals with time series that have continuous
+time indexes (timestamps).
+It’s particularly useful when the two series are very irregular and present
+many gaps.</p>
+<p>In the following example, elements are matched if they have a value difference
+smaller than 0.9, and their timestamps are at most 1 minute apart.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">lcsspy.lcss</span> <span class="kn">import</span> <span class="n">continuous_lcss</span>
+
+<span class="n">ts1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+    <span class="p">[</span><span class="mf">12.4</span><span class="p">,</span> <span class="mf">13.7</span><span class="p">,</span> <span class="mf">15.8</span><span class="p">,</span> <span class="mf">8.7</span><span class="p">],</span>
+    <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="s2">&quot;2023-11-17 08:42:23&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;2023-11-17 08:43:35&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;2023-11-17 08:45:06&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;2023-11-17 08:50:23&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">ts2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+    <span class="p">[</span><span class="mf">13.2</span><span class="p">,</span> <span class="mf">13.0</span><span class="p">,</span> <span class="mf">19.0</span><span class="p">,</span> <span class="mf">9.0</span><span class="p">,</span> <span class="mf">9.2</span><span class="p">],</span>
+    <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="s2">&quot;2023-11-17 08:42:39&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;2023-11-17 08:44:02&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;2023-11-17 08:45:32&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;2023-11-17 08:49:37&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;2023-11-17 08:51:12&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">continuous_lcss</span><span class="p">(</span>
+    <span class="n">ts1</span><span class="o">=</span><span class="n">ts1</span><span class="p">,</span> <span class="n">ts2</span><span class="o">=</span><span class="n">ts2</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">lcss_measure</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The LCSS measure equals <span class="math notranslate nohighlight">\(3/4\)</span> and similar plots to those concerning the
+discrete LCSS example are displayed.</p>
+<a class="reference internal image-reference" href="_images/continuous_lcss_series_plot.png"><img alt="_images/continuous_lcss_series_plot.png" src="_images/continuous_lcss_series_plot.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="_images/continuous_lcss_sequence_plot.png"><img alt="_images/continuous_lcss_sequence_plot.png" src="_images/continuous_lcss_sequence_plot.png" style="width: 800px;" /></a>
+<p>Refer to the <a class="reference internal" href="api.html#api-label"><span class="std std-ref">API Reference</span></a> for more details.</p>
+</section>
+</section>
+</section>
+<section id="testing">
+<h1>Testing<a class="headerlink" href="#testing" title="Link to this heading">¶</a></h1>
+<p>This package uses the pytest framework to run tests.
+A test folder which achieves 100% code coverage is provided.</p>
+</section>
+<section id="copyright-and-license">
+<h1>Copyright and License<a class="headerlink" href="#copyright-and-license" title="Link to this heading">¶</a></h1>
+<p>All source code is Copyright (c) 2023 Francesco Lafratta.</p>
+<p>lcsspy is licensed under the <a class="reference external" href="https://choosealicense.com/licenses/mit">MIT License</a>.</p>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">lcsspy</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#copyright-and-license">Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to lcsspy’s documentation!</a></li>
+      <li>Next: <a href="api.html" title="next chapter">API Reference</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Francesco Lafratta.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/intro.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
